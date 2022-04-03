@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 from PIL import Image
+import re 
 
 #open images in directory and convert them from RGBA to RGB
 
@@ -20,19 +21,22 @@ def convert_rgb(images_path):
 
     
     for images in os.listdir(images_path):
-        # imagePath contains name of the image 
+        #imagePath contains name of the image 
         inputpath = os.path.join(images_path, images)
-        # inputPath contains the full directory name
-        img = Image.open(inputpath).convert('RGB')
-        
 
-        fullOutPath = os.path.join(images_outpath, 'converted_' + images + '.jpeg')
+        #inputPath contains the full directory name
+        img = Image.open(inputpath).convert('RGB')
+
+        #convert .tiff to .jpeg
+        fullOutPath = os.path.join(images_outpath, images + '.jpeg')
+
+        #remove .tiff from the file name
+        replace_name = fullOutPath.replace('.tiff', '')
         #fullOutPath contains the path of the output
         #image that needs to be generated
-        img.save(fullOutPath) 
+        img.resize((600,400)).save(replace_name) 
 
 
 convert_rgb(images_path)
-
 
 
