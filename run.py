@@ -2,17 +2,17 @@
 
 import os
 import requests
-import glob                             
+import glob
+import json                             
 
 text_path = 'c:/Users/Miro/My Drive/Python_coursera/7 Final project/catalog_information/supplier-data/descriptions/*.txt'
 
 
-
 def product_information(text_path):
-
     fruit_information = {}
 
     for files in glob.glob(text_path):
+        fruit_information.clear()
 
         input_path = os.path.join(text_path, files)
 
@@ -22,11 +22,15 @@ def product_information(text_path):
             fruit_information['name'] = texts[0]
             fruit_information['weight'] = texts[1].replace('lbs', '')
             fruit_information['description'] = texts[2].replace('Â\xa0', '')
-            #fruit_information['image_name'] = input_path.split('.') + '.jpeg'
+            fruit_information['image_name'] = (files.strip('.txt')) + '.jpeg' #should print only file name
+            print(fruit_information)
+    return 0
 
-            return fruit_information
+product_information(text_path)
 
-print(product_information(text_path))
+print(json.dumps(product_information(text_path), indent = 4))
+
+
 
 
 
