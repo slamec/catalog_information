@@ -6,29 +6,33 @@ import glob
 
 text_path = 'c:/Users/Miro/My Drive/Python_coursera/7 Final project/catalog_information/supplier-data/descriptions/*.txt'
 
-fruit_information_list = []
-fruit_information = {}
+def product_information(text_path):
 
-for files in glob.glob(text_path):
+    fruit_information_list = []
 
-    input_path = os.path.join(text_path, files)
+    for files in glob.glob(text_path):
 
-    with open(input_path, 'r') as opened:
-        texts = opened.read().splitlines()
+        input_path = os.path.join(text_path, files)
 
-        fruit_information_list.append(texts)
+        with open(input_path, 'r') as opened:
+            texts = opened.read().splitlines()
 
-for items in fruit_information_list:
+            fruit_information_list.append(texts)
 
-    # fruit_information[items[0]] = 'name'
-
-    fruit_information[items[0]] = 'name'
-    fruit_information[items[1]] = 'weight'
-    fruit_information[items[2]] = 'description'
+    return fruit_information_list
 
 
-new_dict = {}
-for k, v in fruit_information.items():
-    new_dict[v] = k
+def product_dict():
 
-print(new_dict)
+    fruit_information = {}
+
+
+    for items in product_information(text_path):
+
+        fruit_information['name'] = items[0]
+        fruit_information['weight'] = items[1]
+        fruit_information['description'] = items[2]
+    
+    return fruit_information
+
+print(product_dict())
