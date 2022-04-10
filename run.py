@@ -6,9 +6,11 @@ import glob
 
 text_path = 'c:/Users/Miro/My Drive/Python_coursera/7 Final project/catalog_information/supplier-data/descriptions/*.txt'
 
+
+
 def product_information(text_path):
 
-    fruit_information_list = []
+    fruit_information = {}
 
     for files in glob.glob(text_path):
 
@@ -17,22 +19,14 @@ def product_information(text_path):
         with open(input_path, 'r') as opened:
             texts = opened.read().splitlines()
 
-            fruit_information_list.append(texts)
+            fruit_information['name'] = texts[0]
+            fruit_information['weight'] = texts[1].replace('lbs', '')
+            fruit_information['description'] = texts[2].replace('Â\xa0', '')
+            #fruit_information['image_name'] = input_path.split('.') + '.jpeg'
 
-    return fruit_information_list
+            return fruit_information
+
+print(product_information(text_path))
 
 
-def product_dict():
 
-    fruit_information = {}
-
-
-    for items in product_information(text_path):
-
-        fruit_information['name'] = items[0]
-        fruit_information['weight'] = items[1]
-        fruit_information['description'] = items[2]
-    
-    return fruit_information
-
-print(product_dict())
