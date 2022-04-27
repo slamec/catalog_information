@@ -31,6 +31,13 @@ def disk_space():
 
 print(disk_space())
 
+# check available memory 
+def ram_usage():
+    ram = psutil.virtual_memory().available  / (1024.0 ** 2)
 
+    if ram <= 500:
+        pass
+    else:
+        return "Available memory is less than 500MB"
 
-
+print(ram_usage())
